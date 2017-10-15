@@ -58,7 +58,7 @@
 				<key>script</key>
 				<string>query=$1
 
-.build/release/GitHubSearch $query</string>
+.build/release/GitHubSearch "${query}"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

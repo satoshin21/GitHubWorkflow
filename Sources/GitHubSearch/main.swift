@@ -20,7 +20,11 @@ Session.send(GitHubAPI.SearchRepositories(query: arg), callbackQueue: .sessionQu
 
     case .success(let response):
 
-        items = response.items.map{ Alfred.Item(title: $0.fullName) }
+        items = response.items.map{
+            Alfred.Item(title: $0.fullName,
+                        arg: $0.url,
+                        icon: "icon.png")
+        }
     default:
         break
     }
