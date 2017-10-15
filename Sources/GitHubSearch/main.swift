@@ -3,7 +3,7 @@ import Foundation
 import AlfredKit
 import APIKit
 
-let alfred = Alfred()
+var items = [Alfred.Item]()
 
 guard CommandLine.arguments.count >= 2 else {
 
@@ -19,11 +19,8 @@ Session.send(GitHubAPI.SearchRepositories(query: arg), callbackQueue: .sessionQu
     switch result {
 
     case .success(let response):
-        
-        response.items.map{ Item(title: $0.fullName, arg: $0.url, quicklookurl: URL(string:$0.url)) }.forEach({ item in
-            alfred.add(item: item)
-        })
 
+        items = response.items.map{ Alfred.Item(title: $0.fullName) }
     default:
         break
     }
@@ -32,4 +29,12 @@ Session.send(GitHubAPI.SearchRepositories(query: arg), callbackQueue: .sessionQu
 }
 
 semaphor.wait()
-try? alfred.export()
+do {
+
+    try items.export()
+} catch {
+    
+    items.removeAll()
+    items.append(.init(title: "Failed to request", valid: false))
+    try items.export()
+}
