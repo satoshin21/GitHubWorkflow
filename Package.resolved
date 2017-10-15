@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "AlfredKit",
+        "repositoryURL": "https://github.com/satoshin21/AlfredKit",
+        "state": {
+          "branch": "master",
+          "revision": "d6721684ab23553c6dda2b80598ee092fa89cdf6",
+          "version": null
+        }
+      },
+      {
         "package": "Result",
         "repositoryURL": "https://github.com/antitypical/Result.git",
         "state": {

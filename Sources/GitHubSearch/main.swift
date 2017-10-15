@@ -19,7 +19,8 @@ Session.send(GitHubAPI.SearchRepositories(query: arg), callbackQueue: .sessionQu
     switch result {
 
     case .success(let response):
-        response.items.map{ Item(title: $0.fullName) }.forEach({ item in
+        
+        response.items.map{ Item(title: $0.fullName, arg: $0.url, quicklookurl: URL(string:$0.url)) }.forEach({ item in
             alfred.add(item: item)
         })
 
